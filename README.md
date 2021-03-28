@@ -1,5 +1,4 @@
-# practicaVue
-Practica Máster Front-End Lemon Code
+# Practica Máster Front-End Lemon Code
 Laboratorio Vue.js
 El objetivo de este ejercicio es el que te familiarizes con VueJS.
 
