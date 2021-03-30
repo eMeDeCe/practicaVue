@@ -30,6 +30,5 @@ const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
 const isValidRecipe = function (recipe: Recipe) {
   console.log("receta", recipe);
   recipe.name !== "" && recipe.description !== "" && recipe.ingredients.length > 0;
-  console.log("descripcion", recipe.description);
   return 
 }
