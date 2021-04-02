@@ -1,5 +1,8 @@
 <template>
-  <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+  <div>
+    <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+    <Snackbar v-bind="{snackbar, snackbarText}"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,14 +13,17 @@ import LoginPage from "./Page.vue";
 import { createEmptyLogin, Login, createEmptyLoginError } from "./viewModel";
 import { mapLoginVMToModel } from "./mapper";
 import { validation } from "./validations";
+import { Snackbar } from "./components";
 
 export default Vue.extend({
   name: "PageLoginContainer",
-  components: { LoginPage },
+  components: { LoginPage, Snackbar },
   data() {
     return {
       login: createEmptyLogin(),
-      loginError: createEmptyLoginError()
+      loginError: createEmptyLoginError(),
+      snackbar: false,
+      snackbarText: "este texto desde el principio"
     };
   },
   methods: {
@@ -34,8 +40,10 @@ export default Vue.extend({
         };
       });
     },
+   
     loginRequest() {
       validation.validateForm(this.login).then(result => {
+
         if (result.succeeded) {
 
           const loginModel = mapLoginVMToModel(this.login);
@@ -43,11 +51,10 @@ export default Vue.extend({
             .then(() => {
               this.$router.push(baseRoutes.recipe);
             })
-            .catch(error =>
-              alert(
-                `Este mensaje debes implementarlo con el componente Snackbar de Vuetify ;) => ${error}`
-              )
-            );
+            .catch((error) => {
+            this.snackbar = true;
+            this.snackbarText = error;
+            });
 
 
         } else {
@@ -57,7 +64,7 @@ export default Vue.extend({
           };
         }
       });
-    }
+    },
   }
 });
 </script>
