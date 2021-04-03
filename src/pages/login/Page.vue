@@ -6,7 +6,6 @@
           <v-card-title primary-title>
             <h3 class="headline">Login</h3>
           </v-card-title>
-  
 
           <v-card-text>
             <form-component v-bind="$props" />
@@ -22,8 +21,7 @@ import Vue, { PropOptions } from "vue";
 import { CenterLayout } from "../../common/layouts";
 import { FormComponent } from "./components";
 import { FormProps } from "./formProps";
-import { Snackbar } from "./components";
-//import Snackbar from "../../common/snackBar/Snackbar.vue";
+import { Snackbar } from "../../common/general";
 
 export default Vue.extend({
   name: "LoginPage",

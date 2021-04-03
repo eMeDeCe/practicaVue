@@ -24,11 +24,7 @@ const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
   return Promise.resolve("Save recipe success");
 };
 
-/*const isValidRecipe = (recipe: Recipe) =>
-  recipe.name !== "" && recipe.description !== "" && recipe.ingredients.length > 0;*/
 
 const isValidRecipe = function (recipe: Recipe) {
-  console.log("receta", recipe);
-  recipe.name !== "" && recipe.description !== "" && recipe.ingredients.length > 0;
-  return 
+  return recipe.name !== "" && recipe.description !== "" && recipe.ingredients.length > 0;
 }

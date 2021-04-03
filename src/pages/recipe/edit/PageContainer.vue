@@ -1,5 +1,8 @@
 <template>
+  <div>
+  <Snackbar v-bind="{snackbar, snackbarText}"/>
   <recipe-edit-page v-bind="{ recipe, recipeError, onUpdateRecipe, onAddIngredient, onSave, onRemoveIngredient }" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,15 +12,18 @@ import { fetchRecipeById, save } from "../../../rest-api/api/recipe";
 import { mapRecipeModelToVm, mapRecipeVmToModel } from "./mapper";
 import { createEmptyRecipe, createEmptyRecipeError } from "./viewModel";
 import { validations } from "./validations";
+import { Snackbar } from "../../../common/general";
 
 export default Vue.extend({
   name: "RecipeEditPageContainer",
-  components: { RecipeEditPage },
+  components: { RecipeEditPage, Snackbar},
   props: { id: String },
   data() {
     return {
       recipe: createEmptyRecipe(),
       recipeError: createEmptyRecipeError(),
+      snackbar: false,
+      snackbarText: "Mensaje en receta"
     };
   },
   beforeMount() {
@@ -42,10 +48,15 @@ export default Vue.extend({
           const recipe = mapRecipeVmToModel(this.recipe);
           save(recipe)
             .then((message) => {
-              console.log(message);
-              this.$router.back();
+
+              this.snackbar = true;
+              this.snackbarText = message;
+              setTimeout( () => this.$router.back(), 2000 )
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              this.snackbar = true;
+              this.snackbarText = error;
+            });
         } else {
           this.recipeError = {
             ...this.recipeError,
@@ -60,6 +71,7 @@ export default Vue.extend({
         ingredients: [...this.recipe.ingredients, ingredient],
       };
       this.validateRecipeField("ingredients", this.recipe.ingredients);
+      
     },
     onRemoveIngredient(ingredient: string) {
       this.recipe = {

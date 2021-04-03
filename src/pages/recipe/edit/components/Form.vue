@@ -13,7 +13,7 @@
       filled
       label="Ingredients"
       placeholder="Add ingredient"
-      append-icon="add"
+      :append-icon="ingredient ? 'add' : undefined"
       v-model="ingredient"
       @click:append="onAddIngredient(ingredient)"
     />
@@ -57,7 +57,7 @@
   </v-card>
 
 
-    <v-btn type="button" color="success" @click.prevent="onSave">Save</v-btn>
+    <v-btn type="button" color="success" :disabled="!this.recipeError.name.succeeded || !this.recipeError.description.succeeded || recipe.ingredients.length == 0" @click.prevent="onSave">Save</v-btn>
   </v-form>
 </template>
 
@@ -79,12 +79,19 @@ export default Vue.extend({
   } as FormProps,
   data() {
     return {
+      show: false,
       ingredient: "",
     };
   },
   computed: {
     resultRecipeErrorName(): boolean | string {
+    
       return this.recipeError.name.succeeded || this.recipeError.name.message;
+    },
+
+     resultIngredients(): boolean | string {
+    
+      return true
     },
 
      resultRecipeErrorDescription(): boolean | string {

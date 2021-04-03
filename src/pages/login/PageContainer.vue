@@ -1,23 +1,24 @@
 <template>
-  <div>
-    <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+  <center-layout>
     <Snackbar v-bind="{snackbar, snackbarText}"/>
-  </div>
+    <login-page v-bind="{ login, updateLogin, loginRequest, loginError }" />
+  </center-layout>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropOptions } from "vue";
+import { CenterLayout } from "../../common/layouts";
 import { loginRequest } from "../../rest-api/api/login";
 import { baseRoutes } from "../../router";
 import LoginPage from "./Page.vue";
 import { createEmptyLogin, Login, createEmptyLoginError } from "./viewModel";
 import { mapLoginVMToModel } from "./mapper";
 import { validation } from "./validations";
-import { Snackbar } from "./components";
+import { Snackbar } from "../../common/general";
 
 export default Vue.extend({
   name: "PageLoginContainer",
-  components: { LoginPage, Snackbar },
+  components: { LoginPage, Snackbar, CenterLayout },
   data() {
     return {
       login: createEmptyLogin(),

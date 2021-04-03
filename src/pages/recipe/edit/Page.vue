@@ -9,10 +9,11 @@ import Vue from "vue";
 import { AppLayout } from "../../../common/layouts";
 import { FormProps } from "./formProps";
 import { FormComponent } from "./components";
+import { Snackbar } from "../../../common/general";
 
 export default Vue.extend({
   name: "RecipeEditPage",
-  components: { AppLayout, FormComponent },
+  components: { AppLayout, FormComponent, Snackbar },
   props: {
     recipe: { require: true },
     recipeError: { required: true },    
