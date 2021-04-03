@@ -6,8 +6,8 @@
       </v-card-title>
       <v-card-text>
         <search-bar-component :search-text="searchText" :on-search="onSearch" />
-        <table-component :recipes="recipes" />
-        <tabledata-component/>
+      <!--  <table-component :recipes="recipes" />-->
+        <tabledata-component :recipes="recipes"/>
       </v-card-text>
     </v-card>
   </app-layout>

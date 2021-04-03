@@ -1,6 +1,7 @@
 <template>
   <table class="table">
     <header-component />
+    
     <tbody>
       <template v-for="recipe in recipes">
         <row-component :key="recipe.id" :recipe="recipe" />
