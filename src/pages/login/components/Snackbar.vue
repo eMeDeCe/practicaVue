@@ -34,7 +34,7 @@ interface propsSnackbar {
       snackbarText: {
         default: ''
       }
-    } as propsSnackbar,
+    }  as propsSnackbar,
 
     data: () => ({
       valid:true
