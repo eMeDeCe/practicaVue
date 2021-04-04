@@ -4,6 +4,9 @@
       <v-card-title class="text-h4">
         Recipes
       </v-card-title>
+      <v-btn depressed :to="routeAdd">
+      Añadir receta
+      </v-btn>
       <v-card-text>
         <search-bar-component :search-text="searchText" :on-search="onSearch" />
       <!--  <table-component :recipes="recipes" />-->
@@ -18,6 +21,7 @@ import Vue, { PropOptions } from "vue";
 import { AppLayout } from "../../../common/layouts";
 import { Recipe } from "./viewModel";
 import { TableComponent, SearchBarComponent, TabledataComponent } from "./components";
+import { baseRoutes } from "../../../router";
 
 export default Vue.extend({
   name: "RecipeListPage",
@@ -27,5 +31,10 @@ export default Vue.extend({
     searchText: String,
     onSearch: { required: true } as PropOptions<(value: string) => void>,
   },
+   computed: {
+    routeAdd(): string {
+      return `/add`;
+    }
+  }
 });
 </script>

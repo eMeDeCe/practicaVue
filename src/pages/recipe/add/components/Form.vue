@@ -1,8 +1,10 @@
 <template>
+
+
   <v-form>
     <v-text-field
       filled
-      label="????"
+      label="Añadiendo receta"
       :value="recipe.name"
       :rules="[resultRecipeErrorName]"
       @input="(name) => onUpdateRecipe('name', name)"
@@ -39,17 +41,13 @@
     class="mx-auto"
     max-width="100%"
     >
-    <v-img
-      :src="recipe.picture"
-      height="250px"
-    ></v-img>
-
+  
     <v-card-title>
       {{recipe.name}}
     </v-card-title>
 
     <v-card-subtitle>
-      Enjoy with this recipe
+      Gracias por la nueva receta :)
     </v-card-subtitle>
 
 
@@ -80,7 +78,7 @@ export default Vue.extend({
   data() {
     return {
       show: false,
-      ingredient: "",
+      ingredient: ""
     };
   },
   computed: {

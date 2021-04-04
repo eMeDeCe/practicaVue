@@ -13,8 +13,14 @@ export const fetchRecipeById = (id: number): Promise<Recipe> => {
 };
 
 export const save = (recipe: Recipe): Promise<string> => {
+  console.log(recipes);
   const index = recipes.findIndex((r) => r.id === recipe.id);
-  console.log("save", isValidRecipe(recipe));
+  return index >= 0 && isValidRecipe(recipe) ? saveRecipeByIndex(index, recipe) : Promise.reject("Something was wrong saving recipe :(");
+};
+
+export const add = (recipe: Recipe): Promise<string> => {
+  console.log(recipe);
+ const index = recipes.length + 1;
   return index >= 0 && isValidRecipe(recipe) ? saveRecipeByIndex(index, recipe) : Promise.reject("Something was wrong saving recipe :(");
 };
 
@@ -23,6 +29,7 @@ const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
 
   return Promise.resolve("Save recipe success");
 };
+
 
 
 const isValidRecipe = function (recipe: Recipe) {
