@@ -2,7 +2,7 @@
   <v-form>
     <v-text-field
       filled
-      label="????"
+      label="Nombre"
       :value="recipe.name"
       :rules="[resultRecipeErrorName]"
       @input="(name) => onUpdateRecipe('name', name)"

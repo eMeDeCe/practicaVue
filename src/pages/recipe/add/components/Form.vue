@@ -4,7 +4,7 @@
   <v-form>
     <v-text-field
       filled
-      label="Añadiendo receta"
+      label="Nombre"
       :value="recipe.name"
       :rules="[resultRecipeErrorName]"
       @input="(name) => onUpdateRecipe('name', name)"
@@ -55,7 +55,7 @@
   </v-card>
 
 
-    <v-btn type="button" color="success" :disabled="!this.recipeError.name.succeeded || !this.recipeError.description.succeeded || recipe.ingredients.length == 0" @click.prevent="onSave">Save</v-btn>
+    <v-btn type="button" color="success" :disabled="desabledSave()" @click.prevent="onSave">Save</v-btn>
   </v-form>
 </template>
 
@@ -75,12 +75,23 @@ export default Vue.extend({
     onRemoveIngredient: { required: true },
     onAddIngredient: { required: true },
   } as FormProps,
+  
   data() {
     return {
       show: false,
       ingredient: ""
     };
   },
+  methods: {
+    desabledSave () {
+      if (this.recipeError.name.succeeded  && this.recipe.name !== '' && this.recipeError.description.succeeded  && this.recipe.description !== '' && this.recipe.ingredients.length > 0 ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  },
+
   computed: {
     resultRecipeErrorName(): boolean | string {
     
@@ -92,7 +103,8 @@ export default Vue.extend({
       return true
     },
 
-     resultRecipeErrorDescription(): boolean | string {
+    resultRecipeErrorDescription(): boolean | string {
+     
       return this.recipeError.description.succeeded || this.recipeError.description.message;
     },
   },
