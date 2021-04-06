@@ -21,7 +21,6 @@ import Vue, { PropOptions } from "vue";
 import { AppLayout } from "../../../common/layouts";
 import { Recipe } from "./viewModel";
 import { TableComponent, SearchBarComponent, TabledataComponent } from "./components";
-import { baseRoutes } from "../../../router";
 
 export default Vue.extend({
   name: "RecipeListPage",
