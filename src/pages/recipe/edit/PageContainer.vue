@@ -1,14 +1,14 @@
 <template>
   <div>
   <Snackbar v-bind="{snackbar, snackbarText}"/>
-  <recipe-edit-page v-bind="{ recipe, recipeError, onUpdateRecipe, onAddIngredient, onSave, onRemoveIngredient }" />
+  <recipe-edit-page v-bind="{ recipe, recipeError, onUpdateRecipe, onAddIngredient, onSave, onRemove, onRemoveIngredient }" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import RecipeEditPage from "./Page.vue";
-import { fetchRecipeById, save } from "../../../rest-api/api/recipe";
+import { fetchRecipeById, save, remove } from "../../../rest-api/api/recipe";
 import { mapRecipeModelToVm, mapRecipeVmToModel } from "./mapper";
 import { createEmptyRecipe, createEmptyRecipeError } from "./viewModel";
 import { validations } from "./validations";
@@ -48,7 +48,6 @@ export default Vue.extend({
           const recipe = mapRecipeVmToModel(this.recipe);
           save(recipe)
             .then((message) => {
-
               this.snackbar = true;
               this.snackbarText = message;
               setTimeout( () => this.$router.back(), 2000 )
@@ -64,6 +63,20 @@ export default Vue.extend({
           };
         }
       });
+    },
+    onRemove() {
+       const recipe = mapRecipeVmToModel(this.recipe);
+       remove(recipe)
+            .then((message) => {
+              this.snackbar = true;
+              this.snackbarText = message;
+              setTimeout( () => this.$router.back(), 2000 )
+            })
+            .catch((error) => {
+              this.snackbar = true;
+              this.snackbarText = error;
+            });
+      
     },
     onAddIngredient(ingredient: string) {
       this.recipe = {

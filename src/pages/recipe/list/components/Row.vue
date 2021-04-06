@@ -11,11 +11,6 @@
         <v-icon>edit</v-icon>
       </v-btn>
     </td>
-    <td :class="$style.editButton">
-      <v-btn text icon  @click="test(recipe)">
-        <v-icon>delete</v-icon>
-      </v-btn>
-    </td>
   </tr>
 </template>
 

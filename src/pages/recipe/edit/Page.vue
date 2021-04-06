@@ -19,6 +19,7 @@ export default Vue.extend({
     recipeError: { required: true },    
     onUpdateRecipe: { require: true },
     onSave: { require: true },
+    onRemove: { require: true },
     onRemoveIngredient: { required: true },
     onAddIngredient: { required: true },
   } as FormProps,

@@ -6,6 +6,7 @@ export interface FormProps {
   recipeError: PropOptions<RecipeError>;
   onUpdateRecipe: PropOptions<(field: string, value: string) => void>;
   onSave: PropOptions<() => void>;
+  onRemove: PropOptions<() => void>;
   onRemoveIngredient: PropOptions<(ingredient: string) => void>;  
   onAddIngredient: PropOptions<(ingredient: string) => void>;
 }

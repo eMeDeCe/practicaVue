@@ -30,7 +30,6 @@ export default Vue.extend({
     fetchRecipes()
       .then((recipes) => {
         this.recipes = mapRecipeListModelToVm(recipes);
-        console.log("dentro de created");
       })
       .catch((error) => console.log(error));
   },

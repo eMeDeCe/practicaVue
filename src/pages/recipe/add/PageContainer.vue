@@ -35,7 +35,6 @@ export default Vue.extend({
       this.validateRecipeField(field, value);
     },
     onSave() {
-      console.log("añadiendo receta");
       validations.validateForm(this.recipe).then((result) => {
         console.log(this.recipe);
         if (result.succeeded) {

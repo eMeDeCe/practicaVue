@@ -57,7 +57,9 @@
   </v-card>
 
 
-    <v-btn type="button" color="success" :disabled="!this.recipeError.name.succeeded || !this.recipeError.description.succeeded || recipe.ingredients.length == 0" @click.prevent="onSave">Save</v-btn>
+  <v-btn type="button" color="success" :disabled="!this.recipeError.name.succeeded || !this.recipeError.description.succeeded || recipe.ingredients.length == 0" @click.prevent="onSave">Save</v-btn>
+  <v-btn type="button" color="error" @click.prevent="onRemove">Remove recipe</v-btn>
+
   </v-form>
 </template>
 
@@ -74,23 +76,23 @@ export default Vue.extend({
     recipeError: { required: true },
     onUpdateRecipe: { required: true },
     onSave: { required: true },
+    onRemove: { required: true },
     onRemoveIngredient: { required: true },
     onAddIngredient: { required: true },
   } as FormProps,
-  data() {
+ data() {
     return {
       show: false,
-      ingredient: "",
+      ingredient: ""
     };
   },
+ 
   computed: {
     resultRecipeErrorName(): boolean | string {
-    
       return this.recipeError.name.succeeded || this.recipeError.name.message;
     },
 
-     resultIngredients(): boolean | string {
-    
+    resultIngredients(): boolean | string {
       return true
     },
 

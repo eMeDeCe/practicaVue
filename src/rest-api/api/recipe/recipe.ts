@@ -22,9 +22,9 @@ export const add = (recipe: Recipe): Promise<string> => {
  return index >= 0 && isValidRecipe(recipe) ? saveRecipeByIndex(index, recipe) : Promise.reject("Something was wrong saving recipe :(");
 };
 
-/*export const remove = (recipe: Recipe): Promise<string> => {
-  
- };*/
+export const remove = (recipe: Recipe): Promise<string> => {
+  return removeRecibeByIndex (recipe) ? Promise.resolve("delete recipe success") : Promise.reject("Something was wrong delete recipe :(");
+};
 
 const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
   recipes = [...recipes.slice(0, index), recipe, ...recipes.slice(index + 1)];
@@ -34,3 +34,8 @@ const saveRecipeByIndex = (index: number, recipe: Recipe): Promise<string> => {
 const isValidRecipe = function (recipe: Recipe) {
   return recipe.name !== "" && recipe.description !== "" && recipe.ingredients.length > 0;
 };
+
+const removeRecibeByIndex = (recipe: Recipe) => {
+  const index = recipe.id - 1;
+  return index > -1 ? recipes.splice( index, 1 ) : false;
+}
