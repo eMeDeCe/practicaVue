@@ -12,7 +12,7 @@
       </v-btn>
     </td>
     <td :class="$style.editButton">
-      <v-btn text icon >
+      <v-btn text icon  @click="test(recipe)">
         <v-icon>delete</v-icon>
       </v-btn>
     </td>
@@ -28,6 +28,11 @@ export default Vue.extend({
   name: "RowComponent",
   props: {
     recipe: { required: true } as PropOptions<Recipe>,
+  },
+  methods: {
+    test(recipe) {
+      console.log("eliminando receta", recipe); 
+    }
   },
   computed: {
     routeEdit(): string {
