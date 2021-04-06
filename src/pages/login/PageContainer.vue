@@ -51,6 +51,8 @@ export default Vue.extend({
           loginRequest(loginModel)
             .then(() => {
               this.$router.push(baseRoutes.recipe);
+              localStorage.name = this.login.name;
+              localStorage.password = this.login.password;
             })
             .catch((error) => {
             this.snackbar = true;
@@ -66,6 +68,10 @@ export default Vue.extend({
         }
       });
     },
+  },
+  mounted () {
+    if (localStorage.name) this.login.name = localStorage.name;
+    if (localStorage.password) this.login.password = localStorage.password;
   }
 });
 </script>
