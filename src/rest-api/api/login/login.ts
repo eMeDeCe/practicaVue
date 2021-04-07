@@ -6,4 +6,4 @@ export const loginRequest = (login: Login): Promise<boolean> =>
     : Promise.reject("Not valid login");
 
 const isValidLogin = (login: Login) =>
-  login.name === "admin" && login.password === "test";
+  (login.name === "admin" && login.password === "test") ||  (login.name === "public" && login.password === "1234");
