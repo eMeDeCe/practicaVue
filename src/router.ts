@@ -17,11 +17,11 @@ export const baseRoutes = {
 export type BaseRoutes = typeof baseRoutes;
 
 const routes: RouteConfig[] = [
-  { path: baseRoutes.root, redirect: baseRoutes.login, meta: {public: true} },
-  { path: baseRoutes.login, component: LoginPageContainer, meta: {public: true}  },
-  { path: baseRoutes.recipe, component: RecipeListPageContainer, meta: {public: true}  },
-  { path: baseRoutes.edit, component: EditRecipePageContainer, props: true, meta: {public: true}  },
-  { path: baseRoutes.add, component: AddRecipePageContainer, props: true, meta: {public: false}  },
+  { path: baseRoutes.root, redirect: baseRoutes.login},
+  { path: baseRoutes.login, component: LoginPageContainer},
+  { path: baseRoutes.recipe, component: RecipeListPageContainer},
+  { path: baseRoutes.edit, component: EditRecipePageContainer},
+  { path: baseRoutes.add, component: AddRecipePageContainer, props: true},
 ];
 export const router = new Router({
   routes,
@@ -30,6 +30,7 @@ export const router = new Router({
 Vue.use(Router);
 router.beforeEach((to, from, next) => {
   // Dos usuarios: public/1234 (entrar editar y no añadir) y admin/test (entrar, editar, añadir)
+  // /login y /recipe (list) : publicas
   if (to.path === "/add") {
     if (localStorage.name === "admin") {
       next();
@@ -37,14 +38,32 @@ router.beforeEach((to, from, next) => {
       next("/login");
     }
   } else {
-    if (to.path === "/login") {
-      next();
-    }
-    else {
-      // Ningun usuario autenticado. Usar $session
-      if( localStorage.name === undefined) {
-        next("/login");
-      }
+    let exp = new RegExp ('\/recipe\/[0-9]');
+    switch (from.path) {
+      case "/": 
+        if(to.path==="/login") {
+          next();
+        } else {
+          next("/login");
+        }
+        break;
+      case "/login":
+        if((to.path==="/recipe" )) {
+          next();
+        } 
+        break;
+
+      case "/recipe":
+        if(localStorage.name !== undefined) {
+          next();
+        } else {
+          to.path === "/login" ? next() : false;
+        }
+        break;
+
+      default: 
+        // Comprobar que cumple con la direccion de la receta
+        exp.test(from.path) ? next() : false;
     }
   }
 });
