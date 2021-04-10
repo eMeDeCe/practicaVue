@@ -20,8 +20,8 @@ const routes: RouteConfig[] = [
   { path: baseRoutes.root, redirect: baseRoutes.login},
   { path: baseRoutes.login, component: LoginPageContainer},
   { path: baseRoutes.recipe, component: RecipeListPageContainer},
-  { path: baseRoutes.edit, component: EditRecipePageContainer},
-  { path: baseRoutes.add, component: AddRecipePageContainer, props: true},
+  { path: baseRoutes.edit, component: EditRecipePageContainer, props: true},
+  { path: baseRoutes.add, component: AddRecipePageContainer},
 ];
 export const router = new Router({
   routes,
